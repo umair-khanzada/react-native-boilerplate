@@ -2,6 +2,20 @@
 #
 .DS_Store
 
+#Project Files
+__tests__
+android
+ios
+.buckconfig
+.flowconfig
+.gitattributes
+.watchmanconfig
+app.json
+babel.config.js
+index.js
+package.json
+package-lock.json
+
 # Xcode
 #
 build/
@@ -35,7 +49,6 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
-package-lock.json
 
 # BUCK
 buck-out/
