@@ -138,11 +138,11 @@ class List extends Component{
     <ListItem
       title={item.name}
       subtitle={item.subtitle}
-      titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.baseFontSize+2, color: THEME_CONFIG.primaryColor}}
-      subtitleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.baseFontSize}}
+      titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.subHeadingFontSize, color: THEME_CONFIG.primaryColor}}
+      subtitleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.fontSize}}
       leftAvatar={{ source: { uri: item.avatar_url } }}
       bottomDivider
-      rightIcon={{type: 'antdesign', name: 'right', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+      rightIcon={{type: 'antdesign', name: 'right', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.smallIconSize}}
     />
   );
 

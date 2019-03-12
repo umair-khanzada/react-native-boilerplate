@@ -17,7 +17,6 @@ class Home extends Component{
     // For ripple effect.
     setTimeout(() =>
       this.props.navigation.navigate('Login'),
-      200
     )
   };
 
@@ -25,7 +24,6 @@ class Home extends Component{
     // For ripple effect.
     setTimeout(() =>
         this.props.navigation.navigate('Register'),
-      200
     )
   };
 

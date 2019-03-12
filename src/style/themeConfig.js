@@ -1,17 +1,19 @@
 const THEME_CONFIG = {
   primaryColor: '#207d7c',
-  primaryRippleColor: '#42ccc8', //ripple effect for buttons.
-  secondaryColor: '#ccc',        //TODO: find secondary color.
+  primaryRippleColor: '#42ccc8',           //ripple effect for buttons.
   primaryTextColor: '#fff',
-  secondaryTextColor: '#ccc',
-  buttonBorderRadius: 0,
-  inputBorderRadius: 0,
   primaryFontFamily: "ComfortaaRegular",
   primaryFontFamilyBold: "ComfortaaBold",
-  baseFontSize: 16,
+  secondaryColor: '#ccc',                  //TODO: find secondary color.
+  secondaryTextColor: '#ccc',
+  fontSize: 16,
+  iconSize: 25,
+  smallIconSize: 18,
+  subHeadingFontSize: 18,
   headingFontSize: 20,
-  gapeBetweenElement: 10,
-  iconSize: 25
+  buttonBorderRadius: 0,
+  inputBorderRadius: 0,
+  gapeBetweenElement: 10
 };
 
 export default THEME_CONFIG;

@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
   labelStyle: {
     fontFamily: THEME_CONFIG.primaryFontFamilyBold,
-    fontSize: THEME_CONFIG.baseFontSize
+    fontSize: THEME_CONFIG.fontSize
   },
   inputStyle: {
     fontFamily: THEME_CONFIG.primaryFontFamily,

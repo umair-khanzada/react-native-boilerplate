@@ -139,8 +139,8 @@ class Chat extends Component{
       title={item.name}
       leftAvatar={{ source: {uri: item.avatar_url}}}
       bottomDivider
-      badge={{value: 9, badgeStyle: {backgroundColor: THEME_CONFIG.primaryColor}, textStyle:{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.baseFontSize}}}
-      titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.baseFontSize+2, color: THEME_CONFIG.primaryColor}}
+      badge={{value: 9, badgeStyle: {backgroundColor: THEME_CONFIG.primaryColor}, textStyle:{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.fontSize}}}
+      titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.subHeadingFontSize, color: THEME_CONFIG.primaryColor}}
     />
   );
 

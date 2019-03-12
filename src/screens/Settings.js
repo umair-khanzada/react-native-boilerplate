@@ -54,7 +54,7 @@ class Settings extends Component{
               bottomDivider
               contentContainerStyle={{paddingVertical: 15}}
               title={item.title}
-              titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.baseFontSize+2, color: THEME_CONFIG.primaryColor}}
+              titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.subHeadingFontSize, color: THEME_CONFIG.primaryColor}}
               leftIcon={{type: 'antdesign', name: item.icon, color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
             />
           ))
