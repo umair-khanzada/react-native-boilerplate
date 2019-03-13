@@ -4,35 +4,42 @@ import {View, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {THEME_CONFIG} from "../style";
 
-
+// TODO: Fetch from DB or local json/js file.
 const list = [
   {
     title: 'Notification',
-    icon: 'notification'
+    icon: 'notification',
+    key: 'notification'
   },
   {
     title: 'Customer Service',
-    icon: 'customerservice'
+    icon: 'customerservice',
+    key: 'customer_service'
   },
   {
-    title: 'Filter',
-    icon: 'filter'
+    title: 'Filters',
+    icon: 'filter',
+    key: 'filters'
   },
   {
     title: 'Call Setting',
-    icon: 'mobile1'
+    icon: 'mobile1',
+    key: 'call_setting'
   },
   {
     title: 'Location',
-    icon: 'enviromento'
+    icon: 'enviromento',
+    key: 'location'
   },
   {
     title: 'Favorite',
-    icon: 'hearto'
+    icon: 'hearto',
+    key: 'Favorite'
   },
   {
     title: 'Clock',
-    icon: 'clockcircleo'
+    icon: 'clockcircleo',
+    key: 'clock'
   }
 ];
 
@@ -40,8 +47,19 @@ class Settings extends Component{
   constructor(props){
     super(props);
 
-    this.state = {};
+    // This is for auto generate state keys according to setting list.
+    const settingsState = {};
+    list.forEach((obj) => settingsState[obj.key] = false);
+
+    this.state = {
+      ...settingsState
+    };
   }
+
+  onValueChange = (name) => (value) => {
+    // Do something...
+    this.setState({[name]: value})
+  };
 
   render () {
     return (
@@ -50,7 +68,7 @@ class Settings extends Component{
           list.map((item, i) => (
             <ListItem
               key={i}
-              switch
+              switch={{value: this.state[item.key], onValueChange: this.onValueChange(item.key), thumbColor: THEME_CONFIG.primaryColor}}
               bottomDivider
               contentContainerStyle={{paddingVertical: 15}}
               title={item.title}
@@ -64,9 +82,9 @@ class Settings extends Component{
   }
 }
 
-Settings.propTypes = {}
+Settings.propTypes = {};
 
-Settings.defaultProps = {}
+Settings.defaultProps = {};
 
 
 export default Settings
