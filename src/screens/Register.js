@@ -82,7 +82,7 @@ class Register extends Component{
           <View style={theme.logo}>
             <Icon type="antdesign" name="setting" iconStyle={{color: '#000', fontSize: 200}} />
           </View>
-          <View style={style.registrationFrom}>
+          <View>
             <Input
               label={<Text style={theme.labelStyle}>First Name</Text>}
               placeholder='First Name'

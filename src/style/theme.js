@@ -61,5 +61,8 @@ export default StyleSheet.create({
     marginVertical:0,
     marginLeft: 0,
     marginRight: 0
+  },
+  disableStyle: {
+    opacity: 0.5
   }
 });
