@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, Text, ToastAndroid } from 'react-native'
 import { Icon, Input } from 'react-native-elements';
+import {emailConstraint, mapErrorMessage, passwordConstraint} from '../util';
 import Button from '../components/Button';
 import Link from '../components/Link';
 import {theme, THEME_CONFIG} from "../style";
+import validate from "validate.js";
 
 class ForgotPassword extends Component{
   constructor(props){
@@ -15,12 +17,24 @@ class ForgotPassword extends Component{
 
   emailChangeHandler = (email) => this.setState({email});
 
-  onSubmit = () => {
-    this.setState({loading: true});
-    setTimeout(() => {
-      this.setState({loading: false});
-      ToastAndroid.show('Reset password link sent.', ToastAndroid.SHORT);
-    }, 1000)
+  handleSubmit = () => {
+    let {email} = this.state;
+    email = email || undefined;
+    const errors = validate(
+      {email},                              // Payload object.
+      {...emailConstraint},                 // Constraint object.
+      {fullMessages: false}                 // Config object.
+    );
+
+    if(errors){
+      this.setState({errors});
+    } else {
+      this.setState({loading: true, errors});
+      setTimeout(() => {
+        this.setState({loading: false});
+        ToastAndroid.show('Reset password link sent.', ToastAndroid.SHORT);
+      }, 1000)
+    }
   };
 
   navigateToLogin = () => {
@@ -28,7 +42,7 @@ class ForgotPassword extends Component{
   };
 
   render () {
-    const {email, loading} = this.state;
+    const {email, loading, errors} = this.state;
     return (
       <View style={theme.container}>
         <View style={[theme.logo, {flex: 1}]}>
@@ -48,11 +62,13 @@ class ForgotPassword extends Component{
             autoCapitalize="none"
             autoComplete="email"
             keyboardType="email-address"
+            errorMessage={mapErrorMessage('email', errors)}
+            errorStyle={theme.errorStyle}
             value={email}
             onChangeText={this.emailChangeHandler}
-            onSubmitEditing={this.onSubmit}
+            onSubmitEditing={this.handleSubmit}
           />
-          <Button text="Forgot Password" loading={loading} touchableProps={{onPress: this.onSubmit}}/>
+          <Button text="Forgot Password" loading={loading} touchableProps={{onPress: this.handleSubmit}}/>
           <Link hint="Back to" text="Login" onPress={this.navigateToLogin}/>
         </View>
       </View>

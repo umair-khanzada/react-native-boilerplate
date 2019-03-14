@@ -1,12 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, ScrollView, ToastAndroid} from 'react-native';
-import { Icon, Input } from 'react-native-elements';
+import {Icon, Input} from 'react-native-elements';
+import {
+  firstNameConstraint,
+  lastNameConstraint,
+  emailConstraint,
+  passwordConstraint,
+  confirmPasswordConstraint,
+  mapErrorMessage
+} from '../util';
 import Button from '../components/Button';
 import Link from '../components/Link';
 import TogglePasswordVisibility from '../components/TogglePasswordVisibility';
 import {theme, THEME_CONFIG} from '../style';
 import style from "../style/register.style";
+import validate from "validate.js";
 
 class Register extends Component{
   constructor(props){
@@ -52,12 +61,35 @@ class Register extends Component{
     this.setState({confirmPasswordSecureTextEntry: !this.state.confirmPasswordSecureTextEntry})
   };
 
-  onSubmit = () => {
-    this.setState({loading: true});
-    setTimeout(() => {
-      this.setState({loading: false});
-      ToastAndroid.show('Successfully registerd.', ToastAndroid.SHORT);
-    }, 1000)
+  handleSubmit = () => {
+    let {first_name, last_name, email, password, confirm_password} = this.state;
+    first_name = first_name || undefined;
+    last_name = last_name || undefined;
+    email = email || undefined;
+    password = password || undefined;
+    confirm_password = confirm_password || undefined;
+
+    const errors = validate(
+      {first_name, last_name, email, password, confirm_password},         // Payload object.
+      {
+        ...firstNameConstraint,
+        ...lastNameConstraint,
+        ...emailConstraint,
+        ...passwordConstraint,
+        ...confirmPasswordConstraint
+      },                                                                  // Constraint object.
+      {fullMessages: false}                                               // Config object.
+    );
+
+    if(errors){
+      this.setState({errors});
+    } else {
+      this.setState({loading: true, errors});
+      setTimeout(() => {
+        this.setState({loading: false});
+        ToastAndroid.show('Successfully registered.', ToastAndroid.SHORT);
+      }, 1000)
+    }
   };
 
   navigateToLogin = () => {
@@ -73,7 +105,8 @@ class Register extends Component{
       confirm_password,
       secureTextEntry,
       confirmPasswordSecureTextEntry,
-      loading
+      loading,
+      errors
     } = this.state;
 
     return (
@@ -93,6 +126,8 @@ class Register extends Component{
               autoFocus
               enablesReturnKeyAutomatically
               returnKeyType="next"
+              errorMessage={mapErrorMessage('first_name', errors)}
+              errorStyle={theme.errorStyle}
               value={first_name}
               onChangeText={this.firstNameChangeHandler}
               onSubmitEditing={() => this.changeFocus(this.lastNameInputRef, 100)}
@@ -108,6 +143,8 @@ class Register extends Component{
               leftIcon={{name: 'user', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
               enablesReturnKeyAutomatically
               returnKeyType="next"
+              errorMessage={mapErrorMessage('last_name', errors)}
+              errorStyle={theme.errorStyle}
               value={last_name}
               onChangeText={this.lastNameChangeHandler}
               onSubmitEditing={() => this.changeFocus(this.emailInputRef, 180)}
@@ -126,6 +163,8 @@ class Register extends Component{
               autoCapitalize="none"
               autoComplete="email"
               keyboardType="email-address"
+              errorMessage={mapErrorMessage('email', errors)}
+              errorStyle={theme.errorStyle}
               value={email}
               onChangeText={this.emailChangeHandler}
               onSubmitEditing={() => this.changeFocus(this.passwordInputRef, 260)}
@@ -140,7 +179,7 @@ class Register extends Component{
               containerStyle={theme.containerStyle}
               leftIcon={{name: 'lock', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
               rightIcon={<TogglePasswordVisibility visible={!secureTextEntry} onPressHandler={this.toggleSecureTextEntry} disabled={!password}/>}
-              errorMessage="Password is required!"
+              errorMessage={mapErrorMessage('password', errors)}
               errorStyle={theme.errorStyle}
               secureTextEntry={secureTextEntry}
               enablesReturnKeyAutomatically
@@ -161,7 +200,7 @@ class Register extends Component{
               containerStyle={theme.containerStyle}
               leftIcon={{name: 'lock', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
               rightIcon={<TogglePasswordVisibility visible={!confirmPasswordSecureTextEntry} onPressHandler={this.toggleConfirmPasswordSecureTextEntry} disabled={!confirm_password}/>}
-              errorMessage="Confirm password is required!"
+              errorMessage={mapErrorMessage('confirm_password', errors)}
               errorStyle={theme.errorStyle}
               secureTextEntry={confirmPasswordSecureTextEntry}
               enablesReturnKeyAutomatically
@@ -170,9 +209,9 @@ class Register extends Component{
               autoComplete="password"
               value={confirm_password}
               onChangeText={this.confirmPasswordChangeHandler}
-              onSubmitEditing={this.onSubmit}
+              onSubmitEditing={this.handleSubmit}
             />
-            <Button text="Register" loading={loading} touchableProps={{onPress: this.onSubmit}}/>
+            <Button text="Register" loading={loading} touchableProps={{onPress: this.handleSubmit}}/>
             <Link hint="Already have an account?" text="Login Here" onPress={this.navigateToLogin}/>
           </View>
         </View>

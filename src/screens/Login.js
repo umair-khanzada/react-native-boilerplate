@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import validate from 'validate.js';
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native'
 import { Icon, Input, CheckBox } from 'react-native-elements'
+import {emailConstraint, passwordConstraint, mapErrorMessage} from '../util';
 import Button from '../components/Button';
 import Link from '../components/Link';
 import TogglePasswordVisibility from '../components/TogglePasswordVisibility';
@@ -44,25 +46,43 @@ class Login extends Component{
 
   navigateToApp = () => {
     //Temporary for display loading.
-    this.setState({loading: true});
-    setTimeout(() => {
-      this.props.navigation.navigate('App')
-    }, 1000)
+
   };
 
   navigateToRegister = () => {
     this.props.navigation.navigate('Register')
   };
 
+  handleSubmit = () => {
+    let {email, password} = this.state;
+    email = email || undefined;
+    password = password || undefined;
+    const errors = validate(
+      {email, password},                              // Payload object.
+      {...emailConstraint, ...passwordConstraint},    // Constraint object.
+      {fullMessages: false}                           // Config object.
+    );
+
+    if(errors){
+      this.setState({errors});
+    } else {
+      this.setState({loading: true, errors});
+      setTimeout(() => {
+        this.setState({loading: false});
+        this.props.navigation.navigate('App')
+      }, 1000)
+    }
+  };
+
   render () {
-    const {email, password, secureTextEntry, loading} = this.state;
+    const {email, password, secureTextEntry, loading, errors} = this.state;
     return (
       <ScrollView ref={(ref) => this.scrollViewRef = ref}>
         <View style={theme.container}>
           <View style={theme.logo}>
             <Icon type="antdesign" name="setting" iconStyle={{color: '#000', fontSize: 200}} />
           </View>
-          <View style={style.loginFrom}>
+          <View>
             <Input
               name="email"
               label={<Text style={theme.labelStyle}>Email</Text>}
@@ -71,7 +91,7 @@ class Login extends Component{
               inputContainerStyle={theme.inputContainerStyle}
               containerStyle={theme.containerStyle}
               leftIcon={{name: 'envelope-o', type: 'font-awesome', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
-              errorMessage="Email is required!"
+              errorMessage={mapErrorMessage('email', errors)}
               errorStyle={theme.errorStyle}
               autoFocus
               enablesReturnKeyAutomatically
@@ -94,7 +114,7 @@ class Login extends Component{
               containerStyle={theme.containerStyle}
               leftIcon={{name: 'lock', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
               rightIcon={<TogglePasswordVisibility visible={!secureTextEntry} onPressHandler={this.toggleSecureTextEntry} disabled={!password}/>}
-              errorMessage="Password is required!"
+              errorMessage={mapErrorMessage('password', errors)}
               errorStyle={theme.errorStyle}
               secureTextEntry={secureTextEntry}
               enablesReturnKeyAutomatically
@@ -103,7 +123,7 @@ class Login extends Component{
               autoComplete="password"
               value={password}
               onChangeText={this.passwordChangeHandler}
-              onSubmitEditing={this.navigateToApp}
+              onSubmitEditing={this.handleSubmit}
             />
             <View style={style.rememberMeParent}>
               <View style={style.rememberMe}>
@@ -123,7 +143,7 @@ class Login extends Component{
                 <Link text="Forgot Password" onPress={this.navigateToForgotPassword}/>
               </View>
             </View>
-            <Button text="Login" loading={loading} touchableProps={{onPress: this.navigateToApp}}/>
+            <Button text="Login" loading={loading} touchableProps={{onPress: this.handleSubmit}}/>
             <View style={style.or}>
               <Text style={[theme.labelStyle]}>OR</Text>
             </View>
