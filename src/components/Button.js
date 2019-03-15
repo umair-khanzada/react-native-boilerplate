@@ -11,14 +11,14 @@ import {theme, THEME_CONFIG} from '../style';
 const Button = ({containerStyle, ripple, textStyle, text, icon, loading, touchableProps}) => {
   // const {style, background, ...props} = touchableProps; //removed style and background from touchable props and pass manually by containerStyle and ripple.
   return (
-    <Touchable disabled={loading} style={[containerStyle, {opacity: loading ? 0.5 : 1}]} background={Touchable.Ripple(ripple)} {...touchableProps}>
+    <Touchable disabled={loading} style={[theme.btnPrimary, containerStyle, {opacity: loading ? 0.5 : 1}]} background={Touchable.Ripple(ripple)} {...touchableProps}>
       <View>
         {
           loading ?
             <ActivityIndicator size="small" color={THEME_CONFIG.primaryTextColor} /> :
-            <View>
+            <View style={{flexDirection: 'row'}}>
               {icon}
-              <Text style={textStyle}>{text}</Text>
+              <Text  style={textStyle}>{text}</Text>
             </View>
         }
       </View>
@@ -43,7 +43,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   textStyle: theme.btnPrimaryText,
-  containerStyle: theme.btnPrimary,
+  containerStyle: {},
   ripple: THEME_CONFIG.primaryRippleColor,
 };
 

@@ -147,8 +147,18 @@ class Login extends Component{
             <View style={style.or}>
               <Text style={[theme.labelStyle]}>OR</Text>
             </View>
-            <Button text="Login With Facebook"/>
-            <Button text="Login With Google"/>
+            <Button
+              icon={<Icon type="evilicon" name="sc-facebook" color={THEME_CONFIG.primaryTextColor} containerStyle={{justifyContent: 'center'}} size={THEME_CONFIG.iconSize+5}/>}
+              text="Login With Facebook"
+              containerStyle={{backgroundColor: '#3b5998'}}
+              ripple="#81a1e2"
+            />
+            <Button
+              icon={<Icon type="evilicon" name="sc-google-plus" color={THEME_CONFIG.primaryTextColor} containerStyle={{justifyContent: 'center'}} size={THEME_CONFIG.iconSize+5}/>}
+              text=" Login With Google"
+              containerStyle={{backgroundColor: '#c94130'}}
+              ripple="#dc9188"
+            />
             <Link hint="Don't have an account?" text="Register Now" onPress={this.navigateToRegister}/>
           </View>
         </View>

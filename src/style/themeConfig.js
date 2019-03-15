@@ -6,10 +6,10 @@ const THEME_CONFIG = {
   primaryFontFamilyBold: "ComfortaaBold",
   secondaryColor: '#ccc',                  //TODO: find secondary color.
   secondaryTextColor: '#ccc',
-  fontSize: 16,
+  fontSize: 14,
   iconSize: 25,
   smallIconSize: 18,
-  subHeadingFontSize: 18,
+  subHeadingFontSize: 16,
   headingFontSize: 20,
   buttonBorderRadius: 0,
   inputBorderRadius: 0,
