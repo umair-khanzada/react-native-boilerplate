@@ -11,3 +11,4 @@ A reusable react-native screens, pages, routes, components.
     react-native-platform-touchable
     react-native-vector-icons
     react-navigation
+    validate.js
