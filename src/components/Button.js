@@ -6,7 +6,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import {theme, THEME_CONFIG} from '../style';
+import {theme, THEME_CONFIG} from '../styles';
 
 const Button = ({containerStyle, ripple, textStyle, text, icon, loading, touchableProps}) => {
   // const {style, background, ...props} = touchableProps; //removed style and background from touchable props and pass manually by containerStyle and ripple.

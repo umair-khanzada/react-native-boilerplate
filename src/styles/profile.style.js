@@ -15,7 +15,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   name: {
-    color: THEME_CONFIG.primaryColor,
+    color: THEME_CONFIG.PRIMARY_COLOR,
     paddingVertical: 20,
     paddingHorizontal: 30,
     fontFamily: THEME_CONFIG.primaryFontFamilyBold,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     alignItems: 'flex-end'
   },
   roundButton: {
-    backgroundColor: THEME_CONFIG.primaryColor,
+    backgroundColor: THEME_CONFIG.PRIMARY_COLOR,
     borderRadius: 50,
     paddingVertical: 20,
     paddingHorizontal: 20,

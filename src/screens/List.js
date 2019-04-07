@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, FlatList} from 'react-native';
-import {ListItem, Icon} from 'react-native-elements';
+import {View, FlatList} from 'react-native';
+import {ListItem, Icon, Text} from 'react-native-elements';
 import {API_CLIENT} from '../util/apiClient';
-import {theme, THEME_CONFIG} from '../style';
+import {theme, THEME_CONFIG} from '../styles';
 
 const list = [
   {
@@ -133,7 +133,6 @@ const SubTitle = ({text, tags}) => (
     {
       !!text &&
       <Text
-        style={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.fontSize - 2}}
         numberOfLines={2}
         ellipsizeMode="tail">
         {text}
@@ -143,7 +142,7 @@ const SubTitle = ({text, tags}) => (
       {
         tags.map( (tag) => (
           <View key={tag} style={{backgroundColor: THEME_CONFIG.primaryColor, marginHorizontal: 3, paddingHorizontal: 10, paddingBottom: 5, borderRadius: 20}}>
-            <Text style={{color: THEME_CONFIG.primaryTextColor, fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.fontSize-2}}>{tag}</Text>
+            <Text>{tag}</Text>
           </View>
         ))
       }
@@ -173,10 +172,10 @@ class List extends Component{
     <ListItem
       title={item.name}
       titleProps={{numberOfLines: 1, ellipsizeMode: 'tail'}}
-      titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.fontSize, color: THEME_CONFIG.primaryColor}}
+      titleStyle={[{color: THEME_CONFIG.PRIMARY_COLOR}]}
       subtitle={<SubTitle text={item.description} tags={item.tags} />}
       leftAvatar={{source: { uri: item.images[0]}, size: "medium"}}
-      badge={{badgeStyle: {backgroundColor: THEME_CONFIG.primaryColor, paddingHorizontal: 5, paddingVertical: 17, borderRadius: 50}, value: item.rating}}
+      badge={{badgeStyle: {backgroundColor: THEME_CONFIG.PRIMARY_COLOR, paddingHorizontal: 5, paddingVertical: 17, borderRadius: 50}, value: item.rating}}
       bottomDivider
     />
   );

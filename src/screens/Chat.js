@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {View, FlatList} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
-import {theme, THEME_CONFIG} from '../style';
+import {theme, THEME_CONFIG} from '../styles';
 
 const list = [
   {
@@ -139,8 +139,8 @@ class Chat extends Component{
       title={item.name}
       leftAvatar={{ source: {uri: item.avatar_url}}}
       bottomDivider
-      badge={{value: 9, badgeStyle: {backgroundColor: THEME_CONFIG.primaryColor}, textStyle:{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.fontSize}}}
-      titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.subHeadingFontSize, color: THEME_CONFIG.primaryColor}}
+      badge={{value: 9, badgeStyle: {backgroundColor: THEME_CONFIG.PRIMARY_COLOR}}}
+      titleStyle={[{color: THEME_CONFIG.PRIMARY_COLOR}]}
     />
   );
 

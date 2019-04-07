@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, ScrollView, ToastAndroid} from 'react-native';
-import {Icon, Input} from 'react-native-elements';
+import {View, ScrollView, ToastAndroid} from 'react-native';
+import {Icon, Input, Text, Button} from 'react-native-elements';
 import {
   firstNameConstraint,
   lastNameConstraint,
@@ -10,11 +10,11 @@ import {
   confirmPasswordConstraint,
   mapErrorMessage
 } from '../util';
-import Button from '../components/Button';
+import Container from '../components/container';
 import Link from '../components/Link';
 import TogglePasswordVisibility from '../components/TogglePasswordVisibility';
-import {theme, THEME_CONFIG} from '../style';
-import style from "../style/register.style";
+import {theme, THEME_CONFIG} from '../styles';
+import style from "../styles/register.style";
 import validate from "validate.js";
 
 class Register extends Component{
@@ -111,23 +111,19 @@ class Register extends Component{
 
     return (
       <ScrollView ref={(ref) => this.scrollViewRef = ref}>
-        <View style={theme.container}>
+        <Container>
           <View style={theme.logo}>
             <Icon type="antdesign" name="setting" iconStyle={{color: '#000', fontSize: 200}} />
           </View>
           <View>
             <Input
-              label={<Text style={theme.labelStyle}>First Name</Text>}
+              label={<Text>First Name</Text>}
               placeholder='First Name'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'user', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'user'}}
               autoFocus
               enablesReturnKeyAutomatically
               returnKeyType="next"
               errorMessage={mapErrorMessage('first_name', errors)}
-              errorStyle={theme.errorStyle}
               value={first_name}
               onChangeText={this.firstNameChangeHandler}
               onSubmitEditing={() => this.changeFocus(this.lastNameInputRef, 100)}
@@ -135,16 +131,12 @@ class Register extends Component{
             />
             <Input
               ref={(ref) => this.lastNameInputRef = ref}
-              label={<Text style={theme.labelStyle}>Last Name</Text>}
+              label={<Text>Last Name</Text>}
               placeholder='Last Name'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'user', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'user'}}
               enablesReturnKeyAutomatically
               returnKeyType="next"
               errorMessage={mapErrorMessage('last_name', errors)}
-              errorStyle={theme.errorStyle}
               value={last_name}
               onChangeText={this.lastNameChangeHandler}
               onSubmitEditing={() => this.changeFocus(this.emailInputRef, 180)}
@@ -152,19 +144,15 @@ class Register extends Component{
             />
             <Input
               ref={(ref) => this.emailInputRef = ref}
-              label={<Text style={theme.labelStyle}>Email</Text>}
+              label={<Text>Email</Text>}
               placeholder='Email'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'envelope-o', type: 'font-awesome', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'envelope-o', type: 'font-awesome'}}
               enablesReturnKeyAutomatically
               returnKeyType="next"
               autoCapitalize="none"
               autoComplete="email"
               keyboardType="email-address"
               errorMessage={mapErrorMessage('email', errors)}
-              errorStyle={theme.errorStyle}
               value={email}
               onChangeText={this.emailChangeHandler}
               onSubmitEditing={() => this.changeFocus(this.passwordInputRef, 260)}
@@ -172,15 +160,11 @@ class Register extends Component{
             />
             <Input
               ref={(ref) => this.passwordInputRef = ref}
-              label={<Text style={theme.labelStyle}>Password</Text>}
+              label={<Text>Password</Text>}
               placeholder='Password'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'lock', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'lock'}}
               rightIcon={<TogglePasswordVisibility visible={!secureTextEntry} onPressHandler={this.toggleSecureTextEntry} disabled={!password}/>}
               errorMessage={mapErrorMessage('password', errors)}
-              errorStyle={theme.errorStyle}
               secureTextEntry={secureTextEntry}
               enablesReturnKeyAutomatically
               returnKeyType="next"
@@ -193,15 +177,11 @@ class Register extends Component{
             />
             <Input
               ref={(ref) => this.confirmPasswordInputRef = ref}
-              label={<Text style={theme.labelStyle}>Confirm Password</Text>}
+              label={<Text>Confirm Password</Text>}
               placeholder='Confirm Password'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'lock', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'lock'}}
               rightIcon={<TogglePasswordVisibility visible={!confirmPasswordSecureTextEntry} onPressHandler={this.toggleConfirmPasswordSecureTextEntry} disabled={!confirm_password}/>}
               errorMessage={mapErrorMessage('confirm_password', errors)}
-              errorStyle={theme.errorStyle}
               secureTextEntry={confirmPasswordSecureTextEntry}
               enablesReturnKeyAutomatically
               returnKeyType="done"
@@ -211,10 +191,10 @@ class Register extends Component{
               onChangeText={this.confirmPasswordChangeHandler}
               onSubmitEditing={this.handleSubmit}
             />
-            <Button text="Register" loading={loading} touchableProps={{onPress: this.handleSubmit}}/>
+            <Button title="Register" loading={loading} onPress={this.handleSubmit}/>
             <Link hint="Already have an account?" text="Login Here" onPress={this.navigateToLogin}/>
           </View>
-        </View>
+        </Container>
       </ScrollView>
     )
   }

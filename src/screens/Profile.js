@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import {View, Text, ScrollView, ImageBackground, TouchableOpacity, ToastAndroid} from 'react-native'
-import {Icon, Input} from 'react-native-elements'
-import Button from '../components/Button';
+import {View, ScrollView, ImageBackground, TouchableOpacity, ToastAndroid} from 'react-native'
+import {Icon, Input, Text, Button} from 'react-native-elements'
+import Container from '../components/container';
 import Link from '../components/Link';
-import {theme, THEME_CONFIG} from "../style";
-import style from "../style/profile.style";
+import {theme, THEME_CONFIG} from "../styles";
+import style from "../styles/profile.style";
 
 class Profile extends Component{
   constructor(props){
@@ -48,27 +48,24 @@ class Profile extends Component{
     const {first_name, last_name, email, loading, editable} = this.state;
     return (
       <ScrollView ref={(ref) => this.scrollViewRef = ref}>
-        <ImageBackground source={require('../images/profile.jpg')} style={style.backgroundImage}>
+        <ImageBackground source={require('../assets/images/profile.jpg')} style={style.backgroundImage}>
           <View style={style.profileImageSection}>
             <View style={style.profileNameSection}>
               <Text style={style.name}>{first_name} {last_name}</Text>
             </View>
             <View style={style.profileEditButtonSection}>
               <TouchableOpacity style={style.roundButton} >
-                <Icon type="antdesign" name="camerao" iconStyle={{fontSize: THEME_CONFIG.iconSize, color: THEME_CONFIG.primaryTextColor}} />
+                <Icon name="camerao" iconStyle={[{color: '#fff'}]} />
               </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
-        <View style={theme.container}>
+        <Container>
           <View>
             <Input
-              label={<Text style={theme.labelStyle}>First Name</Text>}
+              label={<Text>First Name</Text>}
               placeholder='First Name'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={[theme.inputContainerStyle, editable ? {} : theme.disableStyle]}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'user', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'user'}}
               enablesReturnKeyAutomatically
               returnKeyType="next"
               value={first_name}
@@ -79,12 +76,9 @@ class Profile extends Component{
             />
             <Input
               ref={(ref) => this.lastNameInputRef = ref}
-              label={<Text style={theme.labelStyle}>Last Name</Text>}
+              label={<Text>Last Name</Text>}
               placeholder='Last Name'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={[theme.inputContainerStyle, editable ? {} : theme.disableStyle]}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'user', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'user'}}
               enablesReturnKeyAutomatically
               returnKeyType="next"
               value={last_name}
@@ -95,12 +89,9 @@ class Profile extends Component{
             />
             <Input
               ref={(ref) => this.emailInputRef = ref}
-              label={<Text style={theme.labelStyle}>Email</Text>}
+              label={<Text>Email</Text>}
               placeholder='Email'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={[theme.inputContainerStyle, editable ? {} : theme.disableStyle]}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'envelope-o', type: 'font-awesome', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'envelope-o', type: 'font-awesome'}}
               enablesReturnKeyAutomatically
               returnKeyType="done"
               autoCapitalize="none"
@@ -111,10 +102,10 @@ class Profile extends Component{
               onSubmitEditing={this.onSubmit}
               editable={editable}
             />
-            <Button text="Update" loading={loading} touchableProps={{onPress: this.onSubmit}}/>
+            <Button title="Update" loading={loading} onPress={this.onSubmit}/>
             <Link hint="" text="Change password here" onPress={() => {}}/>
           </View>
-        </View>
+        </Container>
       </ScrollView>
     )
   }

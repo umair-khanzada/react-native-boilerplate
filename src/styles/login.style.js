@@ -4,7 +4,6 @@ import THEME_CONFIG from './themeConfig';
 export default StyleSheet.create({
   rememberMeParent: {
     flexDirection: 'row',
-    marginBottom: THEME_CONFIG.gapeBetweenElement
   },
   rememberMe: {
     flex: 1
@@ -16,6 +15,6 @@ export default StyleSheet.create({
   or: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: THEME_CONFIG.gapeBetweenElement
+    marginBottom: THEME_CONFIG.GAPE_BETWEEN_ELEMENTS
   }
 });

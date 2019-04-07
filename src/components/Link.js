@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View,TouchableOpacity, StyleSheet} from 'react-native';
-import {theme} from "../style";
-import THEME_CONFIG from "../style/themeConfig";
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text} from 'react-native-elements';
+import THEME_CONFIG from "../styles/themeConfig";
 
 const style = StyleSheet.create({
   linkParent: {
@@ -10,17 +10,17 @@ const style = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   link: {
-    color: THEME_CONFIG.primaryColor,
+    color: THEME_CONFIG.PRIMARY_COLOR,
     marginLeft: 5,
-    marginBottom: THEME_CONFIG.gapeBetweenElement
+    marginBottom: THEME_CONFIG.GAPE_BETWEEN_ELEMENTS
   }
 });
 
 const Link = ({hint, text, onPress}) => (
   <View style={style.linkParent}>
-    <Text style={theme.labelStyle}>{hint}</Text>
+    <Text>{hint}</Text>
     <TouchableOpacity onPress={onPress}>
-      <Text style={[theme.labelStyle, style.link]}>{text}</Text>
+      <Text style={[style.link]}>{text}</Text>
     </TouchableOpacity>
   </View>
 );

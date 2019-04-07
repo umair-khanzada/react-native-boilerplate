@@ -1,14 +1,10 @@
-import React, {Component} from 'react';
-import {View} from 'react-native';
-import Navigator from './navigation';
-import {theme} from './style'
+import React from 'react';
+import {ThemeProvider} from 'react-native-elements';
+import Navigator from './routes';
+import theme from './styles/theme'
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={theme.rootContainer}>
-        <Navigator />
-      </View>
-    );
-  }
-}
+export default () => (
+  <ThemeProvider theme={theme}>
+    <Navigator />
+  </ThemeProvider>
+);

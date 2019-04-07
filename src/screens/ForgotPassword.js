@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import { View, Text, ToastAndroid } from 'react-native'
-import { Icon, Input } from 'react-native-elements';
+import {View, ToastAndroid} from 'react-native'
+import {Icon, Input, Text, Button} from 'react-native-elements';
 import {emailConstraint, mapErrorMessage, passwordConstraint} from '../util';
-import Button from '../components/Button';
+import Container from '../components/container';
 import Link from '../components/Link';
-import {theme, THEME_CONFIG} from "../style";
+import {theme, THEME_CONFIG} from "../styles";
 import validate from "validate.js";
 
 class ForgotPassword extends Component{
@@ -44,18 +44,15 @@ class ForgotPassword extends Component{
   render () {
     const {email, loading, errors} = this.state;
     return (
-      <View style={theme.container}>
+      <Container>
         <View style={[theme.logo, {flex: 1}]}>
           <Icon type="antdesign" name="setting" iconStyle={{color: '#000', fontSize: 200}} />
         </View>
         <View style={{flex: 1, justifyContent: 'center'}}>
           <Input
-            label={<Text style={theme.labelStyle}>Email</Text>}
+            label={<Text>Email</Text>}
             placeholder='Email'
-            inputStyle={theme.inputStyle}
-            inputContainerStyle={theme.inputContainerStyle}
-            containerStyle={theme.containerStyle}
-            leftIcon={{name: 'envelope-o', type: 'font-awesome', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+            leftIcon={{name: 'envelope-o', type: 'font-awesome'}}
             autoFocus
             enablesReturnKeyAutomatically
             returnKeyType="done"
@@ -63,15 +60,14 @@ class ForgotPassword extends Component{
             autoComplete="email"
             keyboardType="email-address"
             errorMessage={mapErrorMessage('email', errors)}
-            errorStyle={theme.errorStyle}
             value={email}
             onChangeText={this.emailChangeHandler}
             onSubmitEditing={this.handleSubmit}
           />
-          <Button text="Forgot Password" loading={loading} touchableProps={{onPress: this.handleSubmit}}/>
+          <Button title="Forgot Password" loading={loading} onPress={this.handleSubmit}/>
           <Link hint="Back to" text="Login" onPress={this.navigateToLogin}/>
         </View>
-      </View>
+      </Container>
     )
   }
 }

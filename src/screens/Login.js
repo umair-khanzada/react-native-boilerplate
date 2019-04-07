@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import validate from 'validate.js';
-import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native'
-import { Icon, Input, CheckBox } from 'react-native-elements'
+import {View, ScrollView} from 'react-native'
+import {Icon, Input, CheckBox, Button, Text} from 'react-native-elements'
 import {emailConstraint, passwordConstraint, mapErrorMessage} from '../util';
-import Button from '../components/Button';
+// import Button from '../components/Button';
 import Link from '../components/Link';
+import Container from '../components/container';
 import TogglePasswordVisibility from '../components/TogglePasswordVisibility';
-import {theme, THEME_CONFIG} from '../style';
-import style from '../style/login.style';
+import {theme, THEME_CONFIG} from '../styles';
+import style from '../styles/login.style';
 
 class Login extends Component{
   constructor(props){
@@ -78,22 +79,18 @@ class Login extends Component{
     const {email, password, secureTextEntry, loading, errors} = this.state;
     return (
       <ScrollView ref={(ref) => this.scrollViewRef = ref}>
-        <View style={theme.container}>
+        <Container>
           <View style={theme.logo}>
             <Icon type="antdesign" name="setting" iconStyle={{color: '#000', fontSize: 200}} />
           </View>
           <View>
             <Input
               name="email"
-              label={<Text style={theme.labelStyle}>Email</Text>}
+              label={<Text>Email</Text>}
               placeholder='Email'
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'envelope-o', type: 'font-awesome', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'envelope-o', type: 'font-awesome'}}
               errorMessage={mapErrorMessage('email', errors)}
-              errorStyle={theme.errorStyle}
-              autoFocus
+              // autoFocus
               enablesReturnKeyAutomatically
               returnKeyType="next"
               autoCapitalize="none"
@@ -106,16 +103,12 @@ class Login extends Component{
             />
             <Input
               name="password"
-              label={<Text style={theme.labelStyle}>Password</Text>}
+              label={<Text>Password</Text>}
               placeholder='Password'
               ref={(ref) => this.passwordInputRef = ref}
-              inputStyle={theme.inputStyle}
-              inputContainerStyle={theme.inputContainerStyle}
-              containerStyle={theme.containerStyle}
-              leftIcon={{name: 'lock', type: 'antdesign', color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: 'lock'}}
               rightIcon={<TogglePasswordVisibility visible={!secureTextEntry} onPressHandler={this.toggleSecureTextEntry} disabled={!password}/>}
               errorMessage={mapErrorMessage('password', errors)}
-              errorStyle={theme.errorStyle}
               secureTextEntry={secureTextEntry}
               enablesReturnKeyAutomatically
               returnKeyType="done"
@@ -130,46 +123,37 @@ class Login extends Component{
                 <CheckBox
                   title='Remember me'
                   checked={true}
-                  iconType="antdesign"
-                  checkedIcon="checksquare"
-                  uncheckedIcon="closesquare"
-                  checkedColor={THEME_CONFIG.primaryColor}
-                  uncheckedColor={THEME_CONFIG.secondaryColor}
-                  titleProps={{style: [theme.labelStyle, {marginHorizontal: 5}]}}
-                  containerStyle={theme.checkboxContainer}
+                  titleProps={{style: [{marginHorizontal: 5}]}}
                 />
               </View>
               <View style={style.forgotPassword}>
                 <Link text="Forgot Password" onPress={this.navigateToForgotPassword}/>
               </View>
             </View>
-            <Button text="Login" loading={loading} touchableProps={{onPress: this.handleSubmit}}/>
+            <Button title="Login" loading={loading} onPress={this.handleSubmit}/>
             <View style={style.or}>
-              <Text style={[theme.labelStyle]}>OR</Text>
+              <Text>OR</Text>
             </View>
             <Button
-              icon={<Icon type="evilicon" name="sc-facebook" color={THEME_CONFIG.primaryTextColor} containerStyle={{justifyContent: 'center'}} size={THEME_CONFIG.iconSize+5}/>}
-              text="Login With Facebook"
-              containerStyle={{backgroundColor: '#3b5998'}}
-              ripple="#81a1e2"
+              title="Login with facebook"
+              buttonStyle={[{backgroundColor: '#3b5998'}]}
+              // icon={<Icon type="evilicon" name="sc-facebook" color={THEME_CONFIG.primaryTextColor} containerStyle={{justifyContent: 'center'}} size={THEME_CONFIG.iconSize+5}/>}
             />
             <Button
-              icon={<Icon type="evilicon" name="sc-google-plus" color={THEME_CONFIG.primaryTextColor} containerStyle={{justifyContent: 'center'}} size={THEME_CONFIG.iconSize+5}/>}
-              text=" Login With Google"
-              containerStyle={{backgroundColor: '#c94130'}}
-              ripple="#dc9188"
+              title="Login with google"
+              buttonStyle={[{backgroundColor: '#c94130'}]}
             />
             <Link hint="Don't have an account?" text="Register Now" onPress={this.navigateToRegister}/>
           </View>
-        </View>
+        </Container>
       </ScrollView>
     )
   }
 }
 
-Login.propTypes = {}
+Login.propTypes = {};
 
-Login.defaultProps = {}
+Login.defaultProps = {};
 
 
 export default Login

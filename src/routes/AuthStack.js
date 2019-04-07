@@ -23,6 +23,5 @@ export default createStackNavigator(
   {
     initialRouteName: "Home",
     headerMode: 'none',
-    cardStyle: {backgroundImage: 'transparent'}
   }
 );

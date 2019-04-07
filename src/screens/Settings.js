@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {View, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import {THEME_CONFIG} from "../style";
+import {THEME_CONFIG} from "../styles";
 
 // TODO: Fetch from DB or local json/js file.
 const list = [
@@ -68,12 +68,11 @@ class Settings extends Component{
           list.map((item, i) => (
             <ListItem
               key={i}
-              switch={{value: this.state[item.key], onValueChange: this.onValueChange(item.key), thumbColor: THEME_CONFIG.primaryColor}}
+              switch={{value: this.state[item.key], onValueChange: this.onValueChange(item.key), thumbColor: THEME_CONFIG.PRIMARY_COLOR}}
               bottomDivider
               contentContainerStyle={{paddingVertical: 15}}
               title={item.title}
-              titleStyle={{fontFamily: THEME_CONFIG.primaryFontFamily, fontSize: THEME_CONFIG.subHeadingFontSize, color: THEME_CONFIG.primaryColor}}
-              leftIcon={{type: 'antdesign', name: item.icon, color: THEME_CONFIG.primaryColor, size: THEME_CONFIG.iconSize}}
+              leftIcon={{name: item.icon}}
             />
           ))
         }
